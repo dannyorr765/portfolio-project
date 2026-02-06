@@ -1,12 +1,10 @@
 # Portfolio Part 1: Component Brainstorming
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) then delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) then delete this comment -->
-- **Due Date**: <!-- TODO: fill with due date and time (e.g., 10/17 @ 3:10 PM EST) then delete this comment -->
+- **Name**: Danny Orr
+- **Dot Number**: orr.464
+- **Due Date**: 2/6 @ 1:50 pm
 
 ## Assignment Overview
-
-<!-- TODO: read the assignment overview then delete this comment -->
 
 The overall goal of the portfolio project is to have you design and implement
 your own OSU component. There are no limits to what you choose to design and
@@ -29,8 +27,6 @@ implement.
 
 ## Assignment Checklist
 
-<!-- TODO: browse the checklist then delete this comment -->
-
 To be sure you have completed everything on this assignment, we have littered
 this document with TODO comments. You can browse all of them in VSCode by
 opening the TODOs window from the sidebar. The icon looks like a tree and will
@@ -52,8 +48,6 @@ to the tree diagram (you may remove this one as well):
 
 ## Assignment Learning Objectives
 
-<!-- TODO: read the assignment learning objectives then delete this comment -->
-
 Without learning objectives, there really is no clear reason why a particular
 assessment or activity exists. Therefore, to be completely transparent, here is
 what we're hoping you will learn through this particular aspect of the portfolio
@@ -66,8 +60,6 @@ project. Specifically, students should be able to:
    discipline
 
 ## Assignment Rubric: 10 Points
-
-<!-- TODO: read the assignment rubric then delete this comment -->
 
 Again, to be completely transparent, most of the portfolio project, except the
 final submission, is designed as a formative assessment. Formative assessments
@@ -106,23 +98,15 @@ Below is further rationale/explanation for the rubric items above:
 > brainstorming. Plus it helps us get to know you better! Feel free to share
 > images in this section.
 
-<!-- TODO: briefly talk about your interests then delete this comment.
-Also, protip: you can preview what your response looks like by hitting
-the magnifying glass icon in the upper-right corner or pressing CTRL+K and
-then V. This kind of button combination is called a chord, for whatever
-reason -->
+  My personal philosophy for the past few years has been reach for the stars and see how far you can get. I enjoy software development, but my real passion is creating solutions for problems from the ground up and working with my hands. For a personal project, I have been on/off working on a new AI architecture which is more inspired by biology than transformer architectures. I find optimization satisfying and finding simple solutions to complicated problems. I hope to either find a career in AI which fufills these values, or to start some sort of business to give me the financial freedom and time to explore my ideas in my own way.
 
 ## Assignment
-
-<!-- TODO: read the assignment section then delete this comment -->
 
 As previously stated, you are tasked with brainstorming 3 possible components.
 To aid you in this process, we have provided [some example components][example-components]
 that may help you in your brainstorming. All of these components were made at
 some point by one of your peers, so you should feel confident that you can
 accomplish any of them.
-
-<!-- TODO: browse the list of possible projects then delete this comment -->
 
 There is no requirement that you use any of the components listed above.
 If you want to model something else, go for it! Very common early object
@@ -142,8 +126,6 @@ list-like components that have different ways of manipulating the data. Think
 about different ways you might allow a client to manipulate your component.
 
 ### Example Component
-
-<!-- TODO: review this example component then delete this comment -->
 
 To help you brainstorm a few components, we've provided an example below of a
 component you already know well: NaturalNumber. We highly recommend that you
@@ -210,69 +192,94 @@ will likely refine your design to make your implementation easier to use.
 ### Component Designs
 
 > Please use this section to share your designs.
-
-- Component Design #1: <!-- TODO: give component a name then delete this comment -->
+I have already created a partial API for a personal project in C++, but it hasn't been formalized as such. It is currently a mess of vibecoded jargan mixed with my own optimizations, so for this portfolio project, I will translate much of my previously used code to a Java component. I would like to note that, yes, I have been using integers for values like potential, threshold, and more. This is due to potential scaling concerns as floating point numbers are 4 bytes while integers are only one byte, meaning that I can fit each neuron and synapse into just 4 bytes each. Whether the precision lost by this method will be worth it is yet to be determined and subject to change.
+- Component Design #1: Artificial Neuron
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - Simulates how a biological neuron works.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - `void setPotential(int p)`: Sets the neuron's potential value to p
+    - `int getPotential()`: Returns the potential of the neuron
+    - `void setThreshold(int t)`: Sets the neuron's threshold value to t
+    - `int getThreshold()`: Returns the threshold of the neuron
+    - `void setDecay(int d)`: Sets the neuron's decay value to d.
+    - `int getDecay()`: Returns the decay of the neuron
+    - `void setFired(boolean f)`: Sets the neuron's fired value to f.
+    - `boolean getFired()`: Returns the fired value of the neuron
+    - `void addSynapse(Synapse s)`: Adds another synapse to the neuron
+    - `void clearSynapses()`: Clears the synapse assignments of the neuron
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - `void applyDecay(int d)`: Steps the decay value by d (or by a default decay value).
+    - `boolean shouldFire()`: Checks if the potential is greater than or equal to the threshold
+    - `void resetAfterFire()`: Sets fired = true and resets potential and decay to default values
+    - `void applyPotential(int p)`: Adds p to the potential
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Needs to be mutable since vital information about the neuron is stored and altered in each object.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - When translated into Java, yes, I will most likely have to use some sort of list API (or create my own).
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - I don't know
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes. The stepDecay method is basically just setting the neuron's decay value to it's current decay value minus the default decay rate
 
-- Component Design #2: <!-- TODO: give component a name then delete this comment -->
+- Component Design #2: Artificial Synapse
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - Contains the ID's of two separate neurons and transfers weighted signals between them monodirectionally
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - `void setWeight(int w)`: Sets the weight of the synapse to w
+    - `int getWeight()`: Returns the weight of the synapse
+    - `void setEnabled(boolean e)`: Sets the enabled flag to e
+    - `boolean isEnabled()`: Returns the enabled flag
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - `int applyWeight(int s)`: Returns the value of s times the synapse's weight
+    - `void addWeight(int w)`: Adds w to the weight of the synapse
+    ` 'void removeWeight(int w)`: Subtracts w to the weight of the synapse (I wish I had this method)
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Needs to be mutable since vital information about the synapse is stored and altered in each object
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - When translated into Java, yes, I will most likely have to use some sort of list API (or create my own).
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - I don't know
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes. The applyWeight method is calling getWeight, multiplies it by s, and returns that new weight value
 
-- Component Design #3: <!-- TODO: give component a name then delete this comment -->
+- Component Design #3: Artificial Brain
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - Stores the neurons in the network and handles randomness, rewards, pruning, and more
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - `void addNeuron(Neuron n)`: Adds a new neuron to the brain
+    - `void clearNeurons()`: Clears all the neurons to the brain
+    - `Neuron removeNeuron()`: Removes and returns a specific neuron
+    - `int size()`: Number of neurons in the brain
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - `void step()`: Steps the brain
+    - `void propagateSignals()`: Propagates the signals
+    - `void applyLearning(int r)`: Uses reward r to make the network learn
+    - `void pruneInactiveNeurons()`: Prunes inactive neurons (really isn't much you can say about these secondary methods)
+    - `void injectNoise(int magnitude)`: Adds magnitude into the noise of the network
+    - `int countFiredNeurons()`: Returns the number of fired neurons
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Needs to be mutable since vital information about the brain is stored and altered in each object
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - When translated into Java, yes, I will most likely have to use some sort of list API (or create my own).
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - I don't know
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, but most of them will be using the kernal methods of my other two components instead. For instance, countFiredNeurons() will use Neuron's getFired() for every Neuron in Brain (which needs size() from Brain as well)
 
 ## Post-Assignment
 
@@ -280,8 +287,6 @@ The following sections detail everything that you should do once you've
 completed the assignment.
 
 ### Changelog
-
-<!-- TODO: create CHANGELOG then delete this comment -->
 
 At the end of every assignment, you should update the
 [CHANGELOG.md](../../CHANGELOG.md) file found in the root of the project folder.
@@ -320,8 +325,6 @@ of development.
 
 ### Submission
 
-<!-- TODO: read the submission instructions then delete this comment -->
-
 If you have completed the assignment using this template, we recommend that
 you convert it to a PDF before submission. If you're not sure how, check out
 this [Markdown to PDF guide][markdown-to-pdf-guide]. However, PDFs should be
@@ -330,11 +333,7 @@ all your work is there before submitting. For future assignments, you will
 just be submitting a link to a pull request. This will be the only time
 you have to submit any PDFs.
 
-<!-- TODO: upload a PDF of this document and the CHANGELOG to Carmen then delete this comment -->
-
 ### Peer Review
-
-<!-- TODO: review the peer review guidelines then delete this comment -->
 
 Following the completion of this assignment, you will be assigned three
 students' component brainstorming assignments for review. Your job during the
@@ -360,8 +359,6 @@ PDF to read this rubric as a table).
 If you'd like to give feedback for this assignment (or any assignment, really),
 make use of [this survey][survey]. Your feedback helps make assignments
 better for future students.
-
-<!-- TODO: follow the link to share your feedback then delete this comment -->
 
 [example-components]: https://therenegadecoder.com/code/the-never-ending-list-of-small-programming-project-ideas/
 [markdown-to-pdf-guide]: https://therenegadecoder.com/blog/how-to-convert-markdown-to-a-pdf-3-quick-solutions/
