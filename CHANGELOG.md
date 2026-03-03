@@ -13,3 +13,14 @@ the following form: YYYY.0M.0D.
 - Designed a Neuron component
 - Designed a Synapse component
 - Designed a Brain component
+
+## 2026.03.02
+
+### Added
+
+- Designed a proof of concept for Synapse component
+
+### Updated
+
+- Added clamp helper method to simulate int8 behavior
+- Added WEIGHT_SHIFT constant for fixed-point integer math in applyWeight
