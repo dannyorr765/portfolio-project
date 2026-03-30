@@ -35,3 +35,17 @@ the following form: YYYY.0M.0D.
 
 - Changed Synapse.java to Synapse1.java
 - Updated Synapse1.java to extend from Standard
+
+## 2026.03.30
+
+### Added
+
+- Created NeuronKernel.java with kernel method contracts
+- Created Neuron.java with secondary method contracts
+- Created Neuron1.java with full kernel and secondary implementations
+- Created IONeuron.java with role and index contracts for IO neurons
+- Created IONeuron1.java as concrete implementation of IONeuron
+
+### Updated
+
+- Added eligibility methods to SynapseKernel.java and Synapse.java

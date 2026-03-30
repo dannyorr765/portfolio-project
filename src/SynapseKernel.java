@@ -1,8 +1,8 @@
 import components.standard.Standard;
 
 /**
- * Kernel interface for the Synapse component, creating the accesstors to
- * Synapse objects.
+ * Kernel interface for the Synapse component, creating the accessors to Synapse
+ * objects.
  */
 public interface SynapseKernel extends Standard<Synapse> {
 
@@ -46,4 +46,21 @@ public interface SynapseKernel extends Standard<Synapse> {
      * @return this.targetNeuronID
      */
     int getTargetID();
+
+    /**
+     * Sets the eligibility value of this synapse to e.
+     *
+     * @param e
+     *            the new eligibility value
+     * @updates this.eligiblity
+     * @ensures this.eligibility = e
+     */
+    void setEligibility(int e);
+
+    /**
+     * Returns the eligibility of this synapse.
+     *
+     * @return this.eligibility
+     */
+    int getEligibility();
 }

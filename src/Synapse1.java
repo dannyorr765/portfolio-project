@@ -45,6 +45,12 @@ public class Synapse1 implements Synapse {
     private int targetNeuronID;
 
     /**
+     * The eligibility of this synapse, used determine whether the Synapse's
+     * weight should increase or decrease after a reward.
+     */
+    private int eligibility;
+
+    /**
      * How far the weight is offset (This will make sense later).
      */
     private static final int WEIGHT_SHIFT = 7; // 2^7 = 128
@@ -63,27 +69,27 @@ public class Synapse1 implements Synapse {
      *
      * @param targetNeuronID
      *            the ID of the target neuron.
-     * @param weight
-     *            the initial weight of the synapse.
      */
-    public Synapse1(int targetNeuronID, int weight) {
+    public Synapse1(int targetNeuronID) {
         this.targetNeuronID = targetNeuronID;
-        this.weight = weight;
+        final int defaultWeight = 128;
+        this.weight = defaultWeight;
         this.enabled = true;
     }
 
     /*
-     * Standard Methods
-     * ---------------------------------------------------------
+     * Standard Methods -------------------------------------------------------
      */
+
     @Override
     public final Synapse newInstance() {
-        return new Synapse1(0, 0);
+        return new Synapse1(0);
     }
 
     @Override
     public final void clear() {
-        this.weight = 0;
+        final int defaultWeight = 128;
+        this.weight = defaultWeight;
         this.enabled = true;
         this.targetNeuronID = 0;
     }
@@ -171,6 +177,29 @@ public class Synapse1 implements Synapse {
         return this.targetNeuronID;
     }
 
+    /**
+     * Sets the eligibility value of this synapse to e.
+     *
+     * @param e
+     *            the new eligibility value
+     * @updates this.eligiblity
+     * @ensures this.eligibility = e
+     */
+    @Override
+    public final void setEligibility(int e) {
+        this.eligibility = e;
+    }
+
+    /**
+     * Returns the eligibility of this synapse.
+     *
+     * @return this.eligibility
+     */
+    @Override
+    public final int getEligibility() {
+        return this.eligibility;
+    }
+
     /*
      * Secondary methods ------------------------------------------------------
      */
@@ -224,5 +253,32 @@ public class Synapse1 implements Synapse {
     @Override
     public final void removeWeight(int w) {
         this.setWeight(this.getWeight() - w);
+    }
+
+    /**
+     * Adds e to this synapse's eligibility.
+     *
+     * @param e
+     *            the value to add
+     * @updates this.eligibility
+     * @ensures this.eligibility = clamp(#this.eligibility + e)
+     */
+    @Override
+    public final void addEligibility(int e) {
+        this.setEligibility(this.getEligibility() + e);
+    }
+
+    /**
+     *
+     * Removes e from this synapse's eligibility.
+     *
+     * @param e
+     *            the value to remove
+     * @updates this.eligibility
+     * @ensures this.eligibility = clamp(#this.eligibility - e)
+     */
+    @Override
+    public final void removeEligibility(int e) {
+        this.setEligibility(this.getEligibility() - e);
     }
 }

@@ -34,4 +34,25 @@ public interface Synapse extends SynapseKernel {
      * @ensures this.weight = clamp(#this.weight - w)
      */
     void removeWeight(int w);
+
+    /**
+     * Adds e to this synapse's eligibility.
+     *
+     * @param e
+     *            the value to add
+     * @updates this.eligibility
+     * @ensures this.eligibility = clamp(#this.eligibility + e)
+     */
+    void addEligibility(int e);
+
+    /**
+     *
+     * Removes e from this synapse's eligibility.
+     *
+     * @param e
+     *            the value to remove
+     * @updates this.eligibility
+     * @ensures this.eligibility = clamp(#this.eligibility - e)
+     */
+    void removeEligibility(int e);
 }
