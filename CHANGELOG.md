@@ -49,3 +49,15 @@ the following form: YYYY.0M.0D.
 ### Updated
 
 - Added eligibility methods to SynapseKernel.java and Synapse.java
+
+## 2026.04.01
+
+### Added
+
+- Created NeuronSecondary.java with secondary method implementations and common methods
+- Created SynapseSecondary.java with secondary method implementations and common methods
+
+### Updated
+
+- Updated Neuron1.java to extend NeuronSecondary instead of implementing Neuron directly
+- Updated Synapse1.java to extend SynapseSecondary instead of implementing Synapse directly
