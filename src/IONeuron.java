@@ -1,3 +1,5 @@
+import javax.management.relation.Role;
+
 /**
  * Enhanced interface for an IO neuron, extending {@code Neuron} with a role and
  * index to identify it as either an input or output neuron within a

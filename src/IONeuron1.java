@@ -1,3 +1,5 @@
+import javax.management.relation.Role;
+
 /**
  * Concrete implementation of {@code IONeuron}, extending {@code Neuron1} with a
  * role and index to identify it as either an input or output neuron within a

@@ -55,6 +55,17 @@ public class Synapse1 extends SynapseSecondary {
      */
     private static final int MAX_INT8 = 255;
 
+    /**
+     * Creator of initial representation.
+     */
+    private void createNewRep() {
+        final int defaultWeight = 128;
+        this.weight = defaultWeight;
+        this.enabled = true;
+        this.targetNeuronID = 0;
+        this.eligibility = 0;
+    }
+
     /*
      * Constructors -----------------------------------------------------------
      */
@@ -66,10 +77,8 @@ public class Synapse1 extends SynapseSecondary {
      *            the ID of the target neuron.
      */
     public Synapse1(int targetNeuronID) {
+        this.createNewRep();
         this.targetNeuronID = targetNeuronID;
-        final int defaultWeight = 128;
-        this.weight = defaultWeight;
-        this.enabled = true;
     }
 
     /*
@@ -83,18 +92,17 @@ public class Synapse1 extends SynapseSecondary {
 
     @Override
     public final void clear() {
-        final int defaultWeight = 128;
-        this.weight = defaultWeight;
-        this.enabled = true;
-        this.targetNeuronID = 0;
+        this.createNewRep();
     }
 
     @Override
     public final void transferFrom(Synapse source) {
-        this.weight = source.getWeight();
-        this.enabled = source.isEnabled();
-        this.targetNeuronID = source.getTargetID();
-        source.clear();
+        Synapse1 localSource = (Synapse1) source;
+        this.weight = localSource.weight;
+        this.enabled = localSource.enabled;
+        this.targetNeuronID = localSource.targetNeuronID;
+        this.eligibility = localSource.eligibility;
+        localSource.createNewRep();
     }
 
     /*

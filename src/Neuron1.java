@@ -14,7 +14,7 @@ import components.set.Set1L;
  *
  * @author Danny Orr
  */
-public class Neuron1 implements Neuron {
+public class Neuron1 extends NeuronSecondary {
 
     /*
      * Private members --------------------------------------------------------
@@ -52,14 +52,10 @@ public class Neuron1 implements Neuron {
      */
     private Set<Synapse> synapses;
 
-    /*
-     * Constructors ------------------------------------------------------------
-     */
-
     /**
-     * No-argument constructor for Neuron.
+     * Creator of initial representation.
      */
-    public Neuron1() {
+    private void createNewRep() {
         this.potential = 0;
         final int defaultThreshold = 15;
         this.threshold = defaultThreshold;
@@ -68,6 +64,17 @@ public class Neuron1 implements Neuron {
         this.fired = false;
         this.activity = 0;
         this.synapses = new Set1L<>();
+    }
+
+    /*
+     * Constructors ------------------------------------------------------------
+     */
+
+    /**
+     * No-argument constructor for Neuron.
+     */
+    public Neuron1() {
+        this.createNewRep();
     }
 
     /*
@@ -81,29 +88,19 @@ public class Neuron1 implements Neuron {
 
     @Override
     public final void clear() {
-        this.potential = 0;
-        final int defaultThreshold = 15;
-        this.threshold = defaultThreshold;
-        final int defaultDecay = 255;
-        this.decay = defaultDecay;
-        this.fired = false;
-        this.activity = 0;
-        this.synapses.clear();
+        this.createNewRep();
     }
 
     @Override
     public final void transferFrom(Neuron source) {
-        this.potential = source.getPotential();
-        this.threshold = source.getThreshold();
-        this.decay = source.getDecay();
-        this.fired = source.getFired();
-        this.activity = source.getActivity();
-        this.synapses.clear();
-        int count = source.synapseCount();
-        for (int i = 0; i < count; i++) {
-            Synapse s = source.removeAny();
-            this.synapses.add(s);
-        }
+        Neuron1 localSource = (Neuron1) source;
+        this.potential = localSource.potential;
+        this.threshold = localSource.threshold;
+        this.decay = localSource.decay;
+        this.fired = localSource.fired;
+        this.activity = localSource.activity;
+        this.synapses = localSource.synapses;
+        localSource.createNewRep();
     }
 
     /*
@@ -279,76 +276,4 @@ public class Neuron1 implements Neuron {
     public final void setActivity(int a) {
         this.activity = a;
     }
-
-    /*
-     * Secondary methods -------------------------------------------------------
-     */
-
-    /**
-     * Fires this neuron, setting its fired flag and bumping its activity.
-     *
-     * @updates this.fired, this.activity
-     * @ensures this.fired = true and this.activity = min(#this.activity + 1, 7)
-     */
-    @Override
-    public final void fire() {
-        this.setFired(true);
-        this.bumpActivity(1);
-    }
-
-    /**
-     * Decreases this neuron's potential by {@code d}, clamped to 0.
-     *
-     * @param d
-     *            the amount to decay the potential by
-     * @updates this.potential
-     * @requires 0 <= d <= 255
-     * @ensures this.potential = max(#this.potential - d, 0)
-     */
-    @Override
-    public final void applyDecay(int d) {
-        this.setPotential(Math.max(this.getPotential() - d, 0));
-    }
-
-    /**
-     * Resets this neuron's fired flag and potential to their default values.
-     *
-     * @updates this.fired, this.potential
-     * @ensures this.fired = false and this.potential = 0
-     */
-    @Override
-    public final void reset() {
-        this.setFired(false);
-        this.setPotential(0);
-    }
-
-    /**
-     * Increases this neuron's activity level by {@code amount}, clamped to 7.
-     *
-     * @param amount
-     *            the amount to increase activity by
-     * @updates this.activity
-     * @requires 0 <= amount <= 7
-     * @ensures this.activity = min(#this.activity + amount, 7)
-     */
-    @Override
-    public final void bumpActivity(int amount) {
-        final int maxActivity = 7;
-        this.setActivity(Math.min(this.getActivity() + amount, maxActivity));
-    }
-
-    /**
-     * Decreases this neuron's activity level by {@code amount}, clamped to 0.
-     *
-     * @param amount
-     *            the amount to decrease activity by
-     * @updates this.activity
-     * @requires 0 <= amount <= 7
-     * @ensures this.activity = max(#this.activity - amount, 0)
-     */
-    @Override
-    public final void decayActivity(int amount) {
-        this.setActivity(Math.max(this.getActivity() - amount, 0));
-    }
-
 }
