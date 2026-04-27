@@ -3,7 +3,7 @@
  * carrying a weighted signal.
  *
  * @convention this.weight is the signal multiplier for this synapse
- * @correspondence this = (targetNeuronID, weight, enabled)
+ * @correspondence this = (targetNeuronID, weight, enabled, eligibility)
  *
  * @author Danny Orr
  *

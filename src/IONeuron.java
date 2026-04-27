@@ -1,5 +1,8 @@
 import javax.management.relation.Role;
 
+// ^ ignore this, checkstyle refuses to let me delete this
+// then it complains that I don't use it. THEN WHY DO YOU KEEP PUTTING IT IN
+// MY PROJECT
 /**
  * Enhanced interface for an IO neuron, extending {@code Neuron} with a role and
  * index to identify it as either an input or output neuron within a

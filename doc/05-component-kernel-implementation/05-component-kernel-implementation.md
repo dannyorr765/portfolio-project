@@ -120,7 +120,21 @@ Below is further rationale/explanation for the rubric items above:
 > discuss how that representation will be restricted (i.e., by convention)
 > and interpreted (i.e., by correspondence).
 
-<!-- TODO: select a representation and explain why -->
+Throughout this portfolio project, I've both struggled and hesitated to put OSU components into my project. I've struggled due to the simple nature of my component. All it really is is the brain, which both stores data and a list of neurons, then the neurons just store data and a list of synapses, then the synapses just store data and a pointer to another neuron. Other than lists, most OSU components aren't very useful here. I've also been hesitant to implement OSU components to this project since the plan after submitting this project is to then retranslate everything back into C++. All of these components are dead simple for a reason, there may be billions of these at scale. Every byte can equate to gigabytes of both storage and RAM needed to run the model, so simplicity is key. Integrating OSU components means that, when retranslating into C++, I will essentially need to recreate (or find an equivalent) component in C++, which obviously is not ideal.
+
+As for the components I am using, it essentially just boils down to extending off standard, and the Set component. I chose to use set because queue and stack are all instantly eliminated due to the fact that I need to be able to access any neuron/synapse at any moment. Only having access to the beginning/end of the data is off limits. Sequence and list are better, but I never really need to grab a specific neuron/synapse. All I need to be able to do is grab a random neuron/synapse, check it's data, and alter/remove it. Set fits this description perfectly, so I chose it.
+
+Conventions for each component are pretty simple. Synapses must have a defined target, so they can't be null or point to a neuron which doesn't exist. For both synapse and neuron, the clamps which are in place on their values are only put in place for the Java version, and this is simply because Java has no sort of simple int8 representation like C++ has, so I won't count those towards the convention here. As for neuron, there can not be any duplicate Synapses in their list (part of the List contract), and that's basically it for neuron.
+
+As for correspondence, the abstract neuron is defined in Neuron1:
+@correspondence this = (potential, threshold, decay, fired, activity, synapses)
+These six fields define neuron. Potential is how much stimulus the neuron has been given by synapses pointing to it, threshold is how much potential it needs in order to fire, decay is how fast potential is lost by the neuron, fired is a boolean flag which shows whether the neuron has, well, fired, activity is how, well, active the neuron has been recently, and synapses is a list of Synapse objects contained within the Neuron.
+Synapse is similar to Neuron, but one step down. As stated here:
+@correspondence this = (targetNeuronID, weight, enabled, eligibility)
+the Synapse has four fields. targetNeuronID is essentially where the Synapse is pointing to (think of Synapses as a vector with a tail and arrow, this is the arrow), weight is how strong the connection between the tip and tail is, enabled is a boolean value which shows whether the synapse is active or not, and eligibility records how benefitial the synapse has been to the network (determined by an external reward function).
+
+I wanted to make a quick comment on an inconsistency I noticed. In my current C++ implementation, I have every neuron store it's ID so that it can be targeted by a synapse. Looking through, I never implemented this in this Java translation, and I am now questioning why I initially did it this way. Every neuron stores a list of synapses, but I never thought to do it the other way as well where every synapse stores a Neuron object instead of it's ID. Since I'm in this deep, I'm not going to alter the current implementation, but I will change this in my C++ version. The current way this would most likely work is that every Neuron is given an external assigned ID (probably in a Brain component), and that is what is given to/referenced in every Synapse.
+
 
 > To start making your kernel implementation, make a branch off of main in your
 > new repo called something like `kernel-implementation`. There are many ways to
@@ -142,8 +156,6 @@ Below is further rationale/explanation for the rubric items above:
 > rebase strategies described [here](https://stackoverflow.com/questions/35790561/working-while-waiting-for-pending-pr)
 > and [here](https://stackoverflow.com/questions/18021888/continue-working-on-a-git-branch-after-making-a-pull-request).
 
-<!-- TODO: make a new branch from main then delete this comment -->
-
 ## Assignment Tasks
 
 Your primary task for this assignment is to create a kernel implementation that
@@ -162,8 +174,6 @@ The following sections detail everything that you should do once you've
 completed the assignment.
 
 ### Changelog
-
-<!-- TODO: update CHANGELOG then delete this comment -->
 
 At the end of every assignment, you should update the
 [CHANGELOG.md](../../CHANGELOG.md) file found in the root of the project folder.

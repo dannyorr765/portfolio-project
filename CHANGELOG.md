@@ -61,3 +61,11 @@ the following form: YYYY.0M.0D.
 
 - Updated Neuron1.java to extend NeuronSecondary instead of implementing Neuron directly
 - Updated Synapse1.java to extend SynapseSecondary instead of implementing Synapse directly
+
+## 2026.04.26
+
+### Updated
+
+- Updated Neuron1.java to include the Standard methods
+- Updated Synapse1.java to include the Standard methods
+- Added createNewRep() helper to both Neuron1 and Synapse1
