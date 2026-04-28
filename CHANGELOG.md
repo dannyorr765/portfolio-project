@@ -69,3 +69,14 @@ the following form: YYYY.0M.0D.
 - Updated Neuron1.java to include the Standard methods
 - Updated Synapse1.java to include the Standard methods
 - Added createNewRep() helper to both Neuron1 and Synapse1
+
+## 2026.04.27
+
+### Added
+
+- Designed test cases for Neuron1, Neuron, Synapse1, and Synapse
+- Created two sample use cases for components
+
+### Updated
+
+- Replaced default README with project-specific documentation
